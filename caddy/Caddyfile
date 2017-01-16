@@ -1,0 +1,14 @@
+api.donit.xyz {
+	gzip
+	proxy / donit-api:8080
+}
+
+www.donit.xyz {
+	gzip 
+	proxy / donit-web:9000
+}
+
+f2U7xjKF97.donit.xyz {
+	gzip
+	proxy / donit-test:3000
+}
