@@ -10,5 +10,5 @@ www.donit.xyz {
 
 f2U7xjKF97.donit.xyz {
 	gzip
-	proxy / donit-test:3000
+	proxy / donit-test:9000
 }

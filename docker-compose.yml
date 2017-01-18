@@ -1,0 +1,31 @@
+version: '2'
+services:
+    donit-https:
+        image: abiosoft/caddy
+        ports: 
+        - "443:443"
+        - "80:80"
+        volumes:
+        - ./Caddyfile:/etc/Caddyfile
+        - ${HOME}/.caddy:/root/.caddy
+        links:
+        - donit-web:donit-web
+    donit-web:
+        build: ./web
+        volumes:
+        - /var/www/www.donit.xyz:/public
+    donit-test:
+        build: ./web
+        volumes:
+        - /var/www/test.donit.xyz:/public
+    donit-database:
+        image: cockroachdb/cockroach:beta-20170112
+        volumes: 
+        - /var/lib/cockroach/data1:/cockroach/cockroach-data
+        command: [start]
+    donit-api:
+        image: jetty
+        depends_on:
+        - donit-database
+        links:
+        - donit-database:donit-database
