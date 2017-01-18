@@ -8,8 +8,6 @@ services:
         volumes:
         - ./Caddyfile:/etc/Caddyfile
         - ${HOME}/.caddy:/root/.caddy
-        links:
-        - donit-web:donit-web
     donit-web:
         build: ./web
         volumes:
@@ -22,10 +20,10 @@ services:
         image: cockroachdb/cockroach:beta-20170112
         volumes: 
         - /var/lib/cockroach/data1:/cockroach/cockroach-data
-        command: [start]
+        command: [start,--insecure,--host=donit-database,--logtostderr]
     donit-api:
         image: jetty
+        volumes: 
+        - /var/www/api.donit.xyz:/var/lib/jetty/webapps
         depends_on:
         - donit-database
-        links:
-        - donit-database:donit-database

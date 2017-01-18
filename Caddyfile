@@ -12,3 +12,7 @@ f2U7xjKF97.donit.xyz {
 	gzip
 	proxy / donit-test:9000
 }
+
+db.donit.xyz {
+    proxy / donit-database:8080
+}
